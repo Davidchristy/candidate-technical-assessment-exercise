@@ -94,7 +94,7 @@ class PostControllerTests {
 		PostController controller = new PostController(db);
 		ResponseEntity<Object> response = controller.searchContactNames(userRequest);
 		assertEquals(200, response.getStatusCode().value());
-		assertEquals("<200 OK OK,{Contact=[]},[]>", response.toString());
+		assertEquals("<200 OK OK,{Contacts=[]},[]>", response.toString());
 		/* Note: Test shows empty contact list because it's designed to show the response, 
 		for test on database see SQLiteServiceTests
 		*/ 

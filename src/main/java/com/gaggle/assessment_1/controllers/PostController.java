@@ -135,7 +135,7 @@ public class PostController {
 		try{
 			ArrayList<String> contacts = db.searchBasedOnName(userRequest.getName(), userRequest.getMaxNames());
 			Map<String, ArrayList<String>> map = new HashMap<>(); 
-			map.put("Contact", contacts);
+			map.put("Contacts", contacts);
 			return ResponseEntity.ok(map);
 		}
 		catch (RepositoryException e) {
