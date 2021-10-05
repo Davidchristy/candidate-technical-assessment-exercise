@@ -42,6 +42,13 @@ If you just want to run the unit test do so with the following command:
 ./mvnw clean test
 ```
 ---
+## Example Use
+
+If you want an example of how to use this web service look in the python script `functionalTests.py`. 
+
+It's a quick script I wrote to display the functionality of this demo. If you run it while the web service is running it will add a few names to the database and then search for different ID's and names.
+
+---
 # EndPoints
 There are 3 endpoints in this version of the Web service.
 
