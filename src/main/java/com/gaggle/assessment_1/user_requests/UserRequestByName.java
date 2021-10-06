@@ -20,6 +20,6 @@ import lombok.Setter;
 public class UserRequestByName {
     private String name;     
     
-    // If maxNames is less than 0, all names are found. We want this the be the default behavior 
+    // If maxNames is less than or equal to 0, all names are found. We want this the be the default behavior 
     private Integer maxNames = -1;
 }

@@ -12,6 +12,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import com.gaggle.assessment_1.controllers.PostController;
+import com.gaggle.assessment_1.controllers.PutController;
 import com.gaggle.assessment_1.database_services.SQLiteDatabaseService;
 import com.gaggle.assessment_1.exceptions.EntryNotFoundException;
 import com.gaggle.assessment_1.exceptions.RepositoryException;
@@ -27,7 +28,7 @@ class PostControllerTests {
 	@Test
 	void addNewContactValid() throws RepositoryException{
 		SQLiteDatabaseService db = mock(SQLiteDatabaseService.class);
-		PostController controller = new PostController(db);
+		PutController controller = new PutController(db);
 		UserRequestByName userRequest = new UserRequestByName();
 		userRequest.setName("Test");
 		ResponseEntity<Object> response = controller.addNewContact(userRequest);
@@ -42,7 +43,7 @@ class PostControllerTests {
 		userRequest.setName("Test");
 		RepositoryException exception = new RepositoryException("Test");
 		doThrow(exception).when(db).addContact(anyString());
-		PostController controller = new PostController(db);
+		PutController controller = new PutController(db);
 		ResponseEntity<Object> response = controller.addNewContact(userRequest);
 		assertEquals(500, response.getStatusCode().value());
 		assertEquals("<500 INTERNAL_SERVER_ERROR Internal Server Error,{Error=Test},[]>", response.toString());

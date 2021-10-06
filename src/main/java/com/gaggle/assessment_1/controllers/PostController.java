@@ -34,36 +34,7 @@ public class PostController {
 		this.db = db;
 	}
 
-	/**
-	 * This is a method that is called when end users make a POST request.
-	 * It will add a contact to the repository. 
-	 * 
-	 * 
-	 * It accepts JSONS in the following format:
-	 * { "Contact": "name" }
-	 * Where name is a string of the name of the contact they are adding.
-	 * 
-	 * If no error it returns a blank 200 reply
-	 * 
-	 * If any error it returns a 500 error with an approate message.
-	 * 
-	 * Note: This will allow contacts of the same name.
- 	 *
-	 * @param userRequest
-	 * @return
-	 */
-	@PostMapping(value = "/api/contact/add", consumes = "application/json", produces = "application/json")
-	public ResponseEntity<Object> addNewContact(@RequestBody UserRequestByName userRequest) {
-		try{
-			db.addContact(userRequest.getName());
-			return ResponseEntity.ok().build();
-		}
-		catch (RepositoryException e) {
-			Map<String, String> map = new HashMap<>(); 
-			map.put(ERROR_KEY, e.getMessage());
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(map);
-		}
-	}
+
 
 	/**
 	 * This is a method that is called when end users make a POST request.
@@ -117,11 +88,15 @@ public class PostController {
 	 * It accepts JSONS in the following format:
 	 * {"nameQuery": "query" }
 	 * Where query is the substring they are searching for.
+	 * //TODO: add getMaxNames
+	 * 
+	 * If maxNames given and is greater than 0, we limit the number of results.
 	 * 
 	 * It will return a HTTP code of 200 and a json in the following format:
 	 * { "Contacts": ["name1","name2","name3",...] }
 	 * Where name1,2,3 etc are strings of the names containing the substring, listed in
 	 * alphabetical order.
+	 * 
 	 * 
 	 * If no names can be found then it returns an empty list.
 	 * 

@@ -57,6 +57,8 @@ public class SQLiteDatabaseService implements IRepositoryService{
      * To help with testing this public method is here to quickly reset the database. 
      * If this Service were to go live, even internally, I would remove this function.
      * Probably keeping the functionality in a python script editing the dev database.
+     * 
+     * NOTE: This is to show in interview and would NOT be left in normal code
      */
     public void resetDB(){
         String dropTableSql = "DROP TABLE contact;";
@@ -130,10 +132,10 @@ public class SQLiteDatabaseService implements IRepositoryService{
     public ArrayList<String> searchBasedOnName(String searchQuery, Integer maxNumOfResults) throws RepositoryException {
         ArrayList<String> names = new ArrayList<>();
         String selectSql;
-        if(maxNumOfResults<0){
-            selectSql = String.format("SELECT name FROM contact WHERE name LIKE '%%%s%%' ORDER BY name LIMIT %s;",searchQuery, Integer.toString(maxNumOfResults));
-        } else {
+        if(maxNumOfResults<=0){
             selectSql = String.format("SELECT name FROM contact WHERE name LIKE '%%%s%%' ORDER BY name;",searchQuery);
+        } else {
+            selectSql = String.format("SELECT name FROM contact WHERE name LIKE '%%%s%%' ORDER BY name LIMIT %s;",searchQuery, Integer.toString(maxNumOfResults));
         }
         try (Statement stmt = this.conn.createStatement()) {
             ResultSet resultSet = stmt.executeQuery(selectSql);

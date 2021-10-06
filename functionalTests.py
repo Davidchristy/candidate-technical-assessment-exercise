@@ -6,7 +6,7 @@ hostname = "localhost"
 port = "8081"
 search_id_url = f"http://{hostname}:{port}/api/contact/search/id"
 search_name_url = f"http://{hostname}:{port}/api/contact/search/name"
-add_contact_url = f"http://{hostname}:{port}/api/contact/add"
+add_contact_url = f"http://{hostname}:{port}/api/contact/"
 headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
@@ -19,7 +19,7 @@ def add_new_contact(contact_name):
     }
     data = json.dumps(values).encode("utf-8")
     try:
-        req = urllib.request.Request(add_contact_url, data, headers)
+        req = urllib.request.Request(add_contact_url, data, headers, method='PUT')
         with urllib.request.urlopen(req) as f:
             res = f.read()
         pprint(res.decode())
